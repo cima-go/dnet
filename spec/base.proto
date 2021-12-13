@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package spec;
+option go_package = "dnet/spec";
+
+message Identify {
+    string Hostname = 1;
+    bytes MachineID = 2;
+    bytes HardwareAddr = 3;
+}
+
+message Request {
+    Identify Target = 1;
+    bytes Xid = 2;
+    string Name = 3;
+    bytes Data = 4;
+}
+
+message Response {
+    bytes Xid = 1;
+    int32 Code = 2;
+    string Msg = 3;
+    bytes Data = 4;
+}
