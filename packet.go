@@ -3,9 +3,14 @@ package dnet
 import (
 	"bytes"
 	"errors"
+
+	"github.com/golang/protobuf/proto"
+
+	"github.com/cima-go/dnet/lan"
+	"github.com/cima-go/dnet/spec"
 )
 
-var magic = "  CIMA"
+var magic = "  DNETv1"
 
 // CType is command type
 type CType uint8
@@ -18,9 +23,14 @@ const (
 	REPLY                 // RPC Response
 )
 
-type Options struct {
-	Addr string
-	Port string
+func knockRequest() []byte {
+	return encodePacket(KNOCKING, nil)
+}
+
+func knockResponse(peer lan.Discovered, identify *spec.Identify) {
+	if bs, err := proto.Marshal(identify); err == nil {
+		peer.Reply(encodePacket(IDENTIFY, bs))
+	}
 }
 
 func encodePacket(cmd CType, data []byte) []byte {

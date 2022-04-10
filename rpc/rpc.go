@@ -1,11 +1,11 @@
 package rpc
 
 import (
+	"errors"
 	"sync"
 	"time"
 
 	"github.com/bluele/gcache"
-	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
 

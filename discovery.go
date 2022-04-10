@@ -3,11 +3,11 @@ package dnet
 import (
 	"bytes"
 	"context"
+	"errors"
 	"sync"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/pkg/errors"
 	"github.com/rs/xid"
 	"go.uber.org/zap"
 
